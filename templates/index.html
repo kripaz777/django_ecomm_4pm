@@ -67,9 +67,9 @@
         <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
-
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-
+                    {% for brand in brands %}
+                    <div class="brand-item"><img src="{{brand.image.url}}" alt=""></div>
+                    {% endfor %}
 
                 </div>
             </div>
