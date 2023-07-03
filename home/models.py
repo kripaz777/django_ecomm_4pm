@@ -47,3 +47,12 @@ class Product(models.Model):
     labels = models.CharField(choices=LABELS,max_length=50,blank = True)
     def __str__(self):
         return self.name
+
+class CustomerReview(models.Model):
+    name = models.CharField(max_length=300)
+    post = models.CharField(max_length=300)
+    comment = models.TextField(blank = True)
+    image = models.ImageField(upload_to='media')
+
+    def __str__(self):
+        return self.name
