@@ -33,18 +33,26 @@
                     </div>
                     <div class="col-md-3">
                         <div class="header-img">
+                            {% for ad in ads %}
+                            {% if ad.rank == 1 %}
                             <div class="img-item">
-                                <img src="img/category-1.jpg" />
+                                <img src="{{ad.image.url}}" />
                                 <a class="img-text" href="">
-                                    <p>Some text goes here that describes the image</p>
+                                    <p>{{ad.description}}</p>
                                 </a>
                             </div>
+                            {% endif %}
+                            {% endfor %}
+                             {% for ad in ads %}
+                            {% if ad.rank == 2 %}
                             <div class="img-item">
-                                <img src="img/category-2.jpg" />
+                                <img src="{{ad.image.url}}" />
                                 <a class="img-text" href="">
-                                    <p>Some text goes here that describes the image</p>
+                                    <p>{{ad.description}}</p>
                                 </a>
                             </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
