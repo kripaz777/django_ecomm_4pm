@@ -15,3 +15,9 @@ class HomeView(Base):
         self.views['hots'] = Product.objects.filter(labels = 'hot')
         self.views['news'] = Product.objects.filter(labels='new')
         return render(request,'index.html',self.views)
+
+class CategoryView(Base):
+    def get(self,request,slug):
+        cat_id = Category.objects.get(slug = slug).id
+        self.views['cat_products'] = Product.objects.filter(category_id = cat_id)
+        return render(request,'category.html',self.views)
