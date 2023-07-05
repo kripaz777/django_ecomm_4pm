@@ -63,11 +63,11 @@
                                     </div>
                                 </div>
                             </div>
-                            {% for cat in cat_products %}
+                            {% for brand in brand_products %}
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="#">{{cat.name}}</a>
+                                        <a href="#">{{brand.name}}</a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
-                                            <img src="{{cat.image.url}}" alt="Product Image">
+                                            <img src="{{brand.image.url}}" alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -87,10 +87,10 @@
                                         </div>
                                     </div>
                                     <div class="product-price">
-                                        {% if cat.discounted_price > 0 %}
-                                        <h3><span>Rs. </span>{{cat.discounted_price}}</h3>
+                                        {% if brand.discounted_price > 0 %}
+                                        <h3><span>Rs. </span>{{brand.discounted_price}}</h3>
                                         {% else %}
-                                        <h3><span>$</span>{{cat.price}}</h3>
+                                        <h3><span>$</span>{{brand.price}}</h3>
                                         {% endif %}
                                         <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
