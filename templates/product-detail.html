@@ -17,6 +17,7 @@
         <div class="product-detail">
             <div class="container-fluid">
                 <div class="row">
+                    {% for product in product_detail %}
                     <div class="col-lg-8">
                         <div class="product-detail-top">
                             <div class="row align-items-center">
@@ -309,7 +310,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    {% endfor %}
                     <!-- Side Bar Start -->
                     <div class="col-lg-4 sidebar">
                         <div class="sidebar-widget category">
