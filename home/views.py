@@ -36,3 +36,8 @@ class BrandView(Base):
         self.views['sales'] = Product.objects.filter(labels='sale')
 
         return render(request,'brand.html',self.views)
+
+class ProductDetail(Base):
+    def get(self,request,slug):
+        self.views['product_detail'] = Product.objects.filter(slug=slug)
+        return render(request, 'product-detail.html',self.views)
