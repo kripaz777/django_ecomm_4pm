@@ -3,6 +3,8 @@ from .models import *
 # Create your views here.
 # from django.views import View
 from django.views.generic import View
+from django.contrib import messages
+from django.contrib.auth.models import User
 class Base(View):
     views = {}
 
@@ -58,3 +60,34 @@ class SearchView(Base):
         self.views['sales'] = Product.objects.filter(labels='sale')
 
         return render(request,'search.html',self.views)
+
+
+def signup(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        password = request.POST['password']
+        cpassword = request.POST['cpassword']
+        if password == cpassword:
+            if User.objects.filter(username = username).exists():
+                messages.error(request, "The username is already taken")
+                return redirect('/signup')
+
+            elif User.objects.filter(email = email).exists():
+                messages.error(request, "The email is already used")
+                return redirect('/signup')
+            else:
+                data = User.objects.create_user(
+                    first_name = fname,
+                    last_name = lname,
+                    email = email,
+                    username = username,
+                    password= password
+                )
+                data.save()
+        else:
+            messages.error(request, "The passwords do not match")
+            return redirect('/signup')
+    return render(request,'signup.html')
