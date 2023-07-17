@@ -58,3 +58,15 @@ class CustomerReview(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Cart(models.Model):
+    username = models.CharField(max_length=300)
+    slug = models.CharField(max_length=300)
+    quantity = models.FloatField()
+    total = models.FloatField()
+    items = models.ForeignKey(Product,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.username
