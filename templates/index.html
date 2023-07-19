@@ -222,7 +222,7 @@
                                 {% else %}
                                 <h3><span>Rs. </span>{{hot.price}}</h3>
                                 {% endif %}
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <a class="btn" href="/add_to_cart/{{hot.slug}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                                 {% else %}
                                 <h3><span>$</span>{{new.price}}</h3>
                                 {% endif %}
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <a class="btn" href="/add_to_cart/{{new.slug}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>

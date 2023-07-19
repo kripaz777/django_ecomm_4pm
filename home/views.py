@@ -102,7 +102,7 @@ def add_to_cart(request,slug):
     if Cart.objects.filter(username = username,slug = slug,checkout = False):
         price = Product.objects.get(slug = slug).price
         discounted_price = Product.objects.get(slug=slug).discounted_price
-        quantity = Product.objects.get(slug=slug).quantity
+        quantity = Cart.objects.get(slug=slug).quantity
         quantity = quantity +1
         if discounted_price > 0:
             total = discounted_price*quantity
@@ -113,7 +113,7 @@ def add_to_cart(request,slug):
             quantity = quantity,
             total = total
         )
-        return redirect('/cart')
+        return redirect('/cart/')
     else:
         price = Product.objects.get(slug=slug).price
         discounted_price = Product.objects.get(slug=slug).discounted_price
@@ -130,7 +130,7 @@ def add_to_cart(request,slug):
             items = Product.objects.filter(slug = slug)[0]
         )
         data.save()
-        return redirect('/cart')
+        return redirect('/cart/')
 
 
 
