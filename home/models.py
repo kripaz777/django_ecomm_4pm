@@ -67,6 +67,7 @@ class Cart(models.Model):
     total = models.FloatField()
     items = models.ForeignKey(Product,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+    checkout = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
