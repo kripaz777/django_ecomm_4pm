@@ -133,14 +133,30 @@ def add_to_cart(request,slug):
         return redirect('/cart/')
 
 
+def delete_cart(request,slug):
+    username = request.user.username
+    if Cart.objects.filter(slug = slug,username = username,checkout = False):
+        Cart.objects.filter(slug=slug, username=username, checkout=False).delete()
+    return redirect('/cart/')
 
+def reduce_cart(request,slug):
+    username = request.user.username
+    if Cart.objects.filter(username=username, slug=slug, checkout=False):
+        price = Product.objects.get(slug=slug).price
+        discounted_price = Product.objects.get(slug=slug).discounted_price
+        quantity = Cart.objects.get(slug=slug).quantity
+        if quantity > 1:
+            quantity = quantity - 1
+            if discounted_price > 0:
+                total = discounted_price * quantity
+            else:
+                total = price * quantity
 
-
-
-
-
-
-
+            Cart.objects.filter(username=username, slug=slug, checkout=False).update(
+                quantity=quantity,
+                total=total
+            )
+        return redirect('/cart/')
 
 
 

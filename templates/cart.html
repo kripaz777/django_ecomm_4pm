@@ -46,9 +46,9 @@
                                             {% endif %}
                                             <td>
                                                 <div class="qty">
-                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                    <a href = "/reduce_cart/{{cart.slug}}"><button class="btn-minus"><i class="fa fa-minus"></i></button></a>
                                                     <input type="text" value="{{cart.quantity}}">
-                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                    <a href = "/add_to_cart/{{cart.slug}}"><button class="btn-plus"><i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </td>
                                             <td>Rs {{cart.total}}</td>
