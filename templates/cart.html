@@ -52,7 +52,7 @@
                                                 </div>
                                             </td>
                                             <td>Rs {{cart.total}}</td>
-                                            <td><button><i class="fa fa-trash"></i></button></td>
+                                            <td><a href = "/delete_cart/{{cart.slug}}"><button><i class="fa fa-trash"></i></button></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -73,9 +73,9 @@
                                     <div class="cart-summary">
                                         <div class="cart-content">
                                             <h1>Cart Summary</h1>
-                                            <p>Sub Total<span>$99</span></p>
-                                            <p>Shipping Cost<span>$1</span></p>
-                                            <h2>Grand Total<span>$100</span></h2>
+                                            <p>Sub Total<span>Rs. {{all_total}}</span></p>
+                                            <p>Shipping Cost<span>Rs. 50</span></p>
+                                            <h2>Grand Total<span>Rs. {{grand_total}}</span></h2>
                                         </div>
                                         <div class="cart-btn">
                                             <button>Update Cart</button>
