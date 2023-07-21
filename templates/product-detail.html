@@ -111,19 +111,21 @@
                                         </ul>
                                     </div>
                                     <div id="reviews" class="container tab-pane fade">
+                                        {% for review in product_reviews %}
                                         <div class="reviews-submitted">
-                                            <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
+                                            <div class="reviewer">{{review.username}} - <span>{{review.date}}</span></div>
                                             <div class="ratting">
+                                                {% for i in 1|ljust:review.star %}
                                                 <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                {% endfor %}
                                             </div>
                                             <p>
-                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                                                {{review.comment}}
                                             </p>
                                         </div>
+                                        {% endfor %}
+                                        <form action = '/product_review/{{product.slug}}' method = 'POST'>
+                                            {% csrf_token %}
                                         <div class="reviews-submit">
                                             <h4>Give your Review:</h4>
                                            <label for="stars">Choose a car:</label>
@@ -150,6 +152,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

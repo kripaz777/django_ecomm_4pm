@@ -47,7 +47,7 @@ class ProductDetail(Base):
         product_category = Product.objects.get(slug=slug).category_id
         self.views['related_products'] = Product.objects.filter(category_id = product_category)
         self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
-
+        self.views['product_reviews'] = ProductReview.objects.filter(slug=slug)
         return render(request, 'product-detail.html',self.views)
 
 
