@@ -16,6 +16,7 @@ class HomeView(Base):
         self.views['reviews'] = CustomerReview.objects.all()
         self.views['hots'] = Product.objects.filter(labels = 'hot')
         self.views['news'] = Product.objects.filter(labels='new')
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
         return render(request,'index.html',self.views)
 
 class CategoryView(Base):
@@ -25,6 +26,7 @@ class CategoryView(Base):
         self.views['categories'] = Category.objects.all()
         self.views['brands'] = Brand.objects.all()
         self.views['sales'] = Product.objects.filter(labels='sale')
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
 
         return render(request,'category.html',self.views)
 
@@ -36,7 +38,7 @@ class BrandView(Base):
         self.views['categories'] = Category.objects.all()
         self.views['brands'] = Brand.objects.all()
         self.views['sales'] = Product.objects.filter(labels='sale')
-
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
         return render(request,'brand.html',self.views)
 
 class ProductDetail(Base):
@@ -44,6 +46,8 @@ class ProductDetail(Base):
         self.views['product_detail'] = Product.objects.filter(slug=slug)
         product_category = Product.objects.get(slug=slug).category_id
         self.views['related_products'] = Product.objects.filter(category_id = product_category)
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
+
         return render(request, 'product-detail.html',self.views)
 
 
@@ -58,7 +62,7 @@ class SearchView(Base):
         self.views['categories'] = Category.objects.all()
         self.views['brands'] = Brand.objects.all()
         self.views['sales'] = Product.objects.filter(labels='sale')
-
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
         return render(request,'search.html',self.views)
 
 
@@ -102,6 +106,7 @@ class CartView(Base):
         self.views['all_total'] = s
         delevery_charge = 50
         self.views['grand_total'] = s + delevery_charge
+        self.views['count_cart'] = Cart.objects.filter(username = request.user.username, checkout = False).count()
         return render(request,'cart.html',self.views)
 
 def add_to_cart(request,slug):
@@ -167,3 +172,19 @@ def reduce_cart(request,slug):
 
 
 
+def product_review(request,slug):
+    if Product.objects.filter(slug = slug):
+        if request.method == 'POST':
+            username = request.user.username
+            slug = request.POST['slug']
+            star = request.POST['star']
+            comment = request.POST['comment']
+            ProductReview.objects.create(
+                username = username,
+                slug = slug,
+                star = star,
+                comment = comment
+            ).save()
+    else:
+        return redirect(f'/product/{slug}')
+    return redirect(f'/product/{slug}')
