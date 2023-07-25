@@ -176,7 +176,6 @@ def product_review(request,slug):
     if Product.objects.filter(slug = slug):
         if request.method == 'POST':
             username = request.user.username
-            slug = request.POST['slug']
             star = request.POST['star']
             comment = request.POST['comment']
             ProductReview.objects.create(
