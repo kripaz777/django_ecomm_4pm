@@ -50,6 +50,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ("id","price","name")
+
 class CustomerReview(models.Model):
     name = models.CharField(max_length=300)
     post = models.CharField(max_length=300)
