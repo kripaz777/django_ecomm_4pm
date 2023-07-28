@@ -127,3 +127,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+host: 'smtp.gmail.com'
+port: 587
+username: "aceraayush@gmail.com"
+password: "1234567890"
+use_tls: True
+use_ssl: False

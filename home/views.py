@@ -90,6 +90,8 @@ def signup(request):
                     password= password
                 )
                 data.save()
+
+
         else:
             messages.error(request, "The passwords do not match")
             return redirect('/signup')
@@ -171,7 +173,6 @@ def reduce_cart(request,slug):
         return redirect('/cart/')
 
 
-
 def product_review(request,slug):
     if Product.objects.filter(slug = slug):
         if request.method == 'POST':
@@ -187,3 +188,28 @@ def product_review(request,slug):
     else:
         return redirect(f'/product/{slug}')
     return redirect(f'/product/{slug}')
+
+
+from django.core.mail import send_mail
+
+
+def contact(request):
+    if request.Method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        Contact.objects.create(
+            name = name,
+            email = email,
+            subject = subject,
+            message = message
+        ).save()
+        send_mail(
+            "Form submitted",
+            f"Hello {name} having email {email}. I am very glad to say that your query will be replayed soon.",
+            "from@example.com",
+            [email],
+            fail_silently=False,
+        )
+    return render(request,'contact.html')
